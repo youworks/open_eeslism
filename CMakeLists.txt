@@ -1,9 +1,15 @@
 cmake_minimum_required(VERSION 3.0.0)
 project(OpenEESLISM VERSION 0.1.0)
 
-include_directories(includes)
+# Include directories for this projec
+SET(INCLUDE_DIR
+   "includes"
+)
 
-add_executable(eeslism 
+# Add include files
+include_directories("${INCLUDE_DIR}")
+
+add_library(eeslism SHARED
     Source/func/CAT.c
     Source/func/CINC.c
     Source/func/COORDNT.c
@@ -135,8 +141,11 @@ add_executable(eeslism
     Source/lib/wdread.c
 )
 
-target_link_libraries(eeslism m)
-
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)
+
+set(THREADS_PREFER_PTHREAD_FLAG ON)              
+find_package(Threads REQUIRED)
+
+target_link_libraries(eeslism m "-pthread")

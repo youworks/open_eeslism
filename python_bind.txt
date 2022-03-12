@@ -1,0 +1,28 @@
+Python binding を作ろうとした
+
+方針
+* swig を使って main関数に対してPythonから呼び出しをする
+
+問題点
+* print処理があるので、それを全部つぶす必要がありそう。
+* Pythonを巻き込んで落ちる
+
+# 共有ライブラリ(libeeslism.so)のビルド
+rm -rf build
+cmake -B build
+cd build
+make
+#TODO: 実行ファイルと共有ファイルを同時に生成できないか
+
+# 共有オブジェクトを登録
+sudo cp libeeslism.so /usr/local/lib/
+sudo ldconfig
+
+cd ../py
+
+# e79.i から e79_wrap.c および 
+swig -python e79.i
+gcc -c e79_wrap.c -I /usr/include/python3.8 -fPIC
+
+# オブジェクトのリンク
+ld -shared e79_wrap.o ../build/libeeslism.so -o _e79.so

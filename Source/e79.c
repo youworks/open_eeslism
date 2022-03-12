@@ -77,6 +77,15 @@ int		SETprint = 0;
 
 /* -------------------------------------------------- */
 
+int run(char *file){
+	char* args[] = {
+		file
+	};
+	/*main(1, args);*/
+	return 100;
+}
+
+
 int main(int Narg, char **File)
 {
 	char	s[SCHAR], hptest[SCHAR];
