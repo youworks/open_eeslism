@@ -320,7 +320,7 @@ typedef struct valv
 	//char	*OMfanName ;
 } VALV ;
 
-char Hload,  /* Hload = HEATING_LOAD */
+extern char Hload,  /* Hload = HEATING_LOAD */
 Cload,  /* Cload = COOLING_LOAD */
 		HCload;  /* HCload = HEATCOOL_LOAD 
 used in void Contrldata( )*/
